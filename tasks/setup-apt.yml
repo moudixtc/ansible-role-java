@@ -1,0 +1,15 @@
+---
+- block:
+    - name: download java
+      get_url:
+        dest: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
+        url: "http://cdn.azul.com/zulu/bin/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
+    - name: install java
+      apt:
+        deb: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
+    - name: clean up the downloaded file
+      file:
+        path: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
+        state: absent
+  when: java_dir_status.stat.exists == false
+...

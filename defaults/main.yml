@@ -1,0 +1,8 @@
+---
+# defaults file for ansible-role-java-zulu
+
+zulu_java_version: 8.0.102
+zulu_version: 8.17.0.3
+java_default_dir: /usr/lib/jvm/zulu-8-amd64
+java_version: 1.8.0_102
+...
