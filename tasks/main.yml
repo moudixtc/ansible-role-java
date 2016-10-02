@@ -2,14 +2,8 @@
 # tasks file for ansible-role-java-zulu
 
 - block:
-    - name: check if java is available
-      stat:
-        path: "{{ java_default_dir }}"
-      register: java_dir_status
-
     # install appropriate package
-    - include: setup-apt.yml
-      when: ansible_pkg_mgr == 'apt'
+    - include: "setup-{{ ansible_pkg_mgr }}.yml"
 
     # setup environment
     - name: set up $JAVA_HOME

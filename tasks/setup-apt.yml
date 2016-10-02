@@ -1,15 +1,20 @@
 ---
 - block:
-    - name: download java
-      get_url:
-        dest: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
-        url: "http://cdn.azul.com/zulu/bin/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
-    - name: install java
+    - name: Import Azul's public key
+      apt_key:
+        id: 0x219BD9C9
+        keyserver: hkp://keyserver.ubuntu.com:80
+        state: present
+    - name: Add the Azul package to the APT repository
+      apt_repository:
+        filename: zulu
+        repo: 'deb http://repos.azulsystems.com/debian stable main'
+        state: present
+        update_cache: yes
+    - name: Install Zulu
       apt:
-        deb: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
-    - name: clean up the downloaded file
-      file:
-        path: "/tmp/zulu{{ zulu_version }}-jdk{{ zulu_java_version }}-linux_amd64.deb"
-        state: absent
-  when: java_dir_status.stat.exists == false
+        name: "zulu-{{ java_major_version }}"
+        state: present
+        update_cache: yes
+  become: yes
 ...
