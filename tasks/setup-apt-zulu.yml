@@ -1,5 +1,4 @@
 ---
-- include: "vars/vars-zulu.yml"
 - block:
     - name: Import Azul's public key
       apt_key:
@@ -18,4 +17,5 @@
         name: "zulu-{{ java_major_version }}"
         state: present
   become: yes
+  become_user: root
 ...

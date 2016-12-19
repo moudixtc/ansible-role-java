@@ -1,15 +1,18 @@
 ---
 # tasks file for ansible-role-java
 
-- block:
-    # install appropriate package
-    - include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
+# Include vendor specific variables
+- include_vars: "vars-{{ java_vendor }}.yml"
 
-    # setup environment
-    - name: set up $JAVA_HOME
+# Perform tasks specific for this system with the chosen vendor
+- include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
+
+- block:
+    - name: Set up $JAVA_HOME
       template:
         src: java-home.sh.j2
         dest: /etc/profile.d/java-home.sh
         mode: 0644
   become: yes
+  become_user: root
 ...
