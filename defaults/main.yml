@@ -1,7 +1,6 @@
 ---
-# defaults file for ansible-role-java-zulu
+# defaults file for ansible-role-java
 
-java_default_dir: /usr/lib/jvm/zulu-{{ java_major_version }}-amd64
-java_major_version: 8
-zulu_version: 8.17.0.3
+apt_cache_valid_time: 43200
+java_vendor: zulu
 ...

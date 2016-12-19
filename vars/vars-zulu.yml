@@ -1,0 +1,3 @@
+---
+java_home: "/usr/lib/jvm/zulu-{{ java_major_version }}-amd64"
+java_major_version: 8

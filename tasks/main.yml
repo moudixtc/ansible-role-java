@@ -1,9 +1,9 @@
 ---
-# tasks file for ansible-role-java-zulu
+# tasks file for ansible-role-java
 
 - block:
     # install appropriate package
-    - include: "setup-{{ ansible_pkg_mgr }}.yml"
+    - include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
     # setup environment
     - name: set up $JAVA_HOME
