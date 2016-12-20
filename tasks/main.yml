@@ -8,11 +8,12 @@
 - include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
 - block:
-    - name: Set up $JAVA_HOME
-      template:
-        src: java-home.sh.j2
-        dest: /etc/profile.d/java-home.sh
-        mode: 0644
+    - name: Setup environment for maven
+      blockinfile:
+        block: |
+          export JAVA_HOME={{ java_home }}
+        dest: /etc/bash.bashrc
+        marker: "# {mark} ANSIBLE MANAGED BLOCK to set java environment variables"
   become: yes
   become_user: root
 ...
