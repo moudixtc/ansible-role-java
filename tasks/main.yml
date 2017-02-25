@@ -8,7 +8,7 @@
 - include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
 - block:
-    - name: Setup environment for maven
+    - name: Setup JAVA_HOME environment variable
       blockinfile:
         block: |
           export JAVA_HOME={{ java_home }}
