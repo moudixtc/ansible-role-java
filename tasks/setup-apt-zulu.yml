@@ -11,11 +11,16 @@
         repo: 'deb http://repos.azulsystems.com/debian stable main'
         state: present
         update_cache: yes
+    - name: Set Zulu package name
+      set_fact:
+        java_desired_state: present
+        zulu_package: "zulu-{{ java_major_version }}={{ zulu_version }}"
+      when: zulu_version != "latest"
     - name: Install Zulu
       apt:
         cache_valid_time: "{{ apt_cache_valid_time }}"
-        name: "zulu-{{ java_major_version }}"
-        state: present
+        name: "{{ zulu_package }}"
+        state: "{{ java_desired_state }}"
   become: yes
   become_user: root
 ...

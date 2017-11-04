@@ -5,7 +5,7 @@
 - include_vars: "vars-{{ java_vendor }}.yml"
 
 # Perform tasks specific for this system with the chosen vendor
-- include: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
+- include_tasks: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
 - block:
     - name: Setup JAVA_HOME environment variable

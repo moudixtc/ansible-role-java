@@ -2,5 +2,6 @@
 # defaults file for ansible-role-java
 
 apt_cache_valid_time: 43200
+java_desired_state: latest
 java_vendor: zulu
 ...
