@@ -1,19 +1,25 @@
 ---
 # tasks file for ansible-role-java
 
-# Include vendor specific variables
-- include_vars: "vars-{{ java_vendor }}.yml"
+- name: Include package manager specific vars
+  include_vars: "{{ ansible_pkg_mgr }}.yml"
+  ignore_errors: yes
 
-# Perform tasks specific for this system with the chosen vendor
-- include_tasks: "setup-{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
+- name: Include distribution specific vars
+  include_vars: "{{ ansible_distribution }}.yml"
+  ignore_errors: yes
+
+- name: Run package manager specific tasks
+  include_tasks: "{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
 - block:
     - name: Setup JAVA_HOME environment variable
       blockinfile:
         block: |
           export JAVA_HOME={{ java_home }}
-        dest: /etc/bash.bashrc
+        create: yes
         marker: "# {mark} ANSIBLE MANAGED BLOCK to set java environment variables"
+        path: /etc/bash.bashrc
   become: yes
   become_user: root
 ...

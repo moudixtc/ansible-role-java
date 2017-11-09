@@ -5,22 +5,31 @@
         id: '0x219BD9C9'
         keyserver: 'hkp://keyserver.ubuntu.com:80'
         state: present
+
+    - name: Check Azul's repository file status
+      stat:
+        path: /etc/apt/sources.list.d/zulu.list
+      register: zulu_repo_status
+
     - name: Add the Azul package to the APT repository
       apt_repository:
         filename: zulu
-        repo: 'deb http://repos.azulsystems.com/debian stable main'
+        repo: "{{ java_apt_repo }}"
         state: present
         update_cache: yes
+      when: not zulu_repo_status.stat.exists
+
     - name: Set Zulu package name
       set_fact:
-        java_desired_state: present
-        zulu_package: "zulu-{{ java_major_version }}={{ zulu_version }}"
-      when: zulu_version != "latest"
+        java_package_state: present
+        java_package_name: "zulu-{{ java_major_version }}={{ java_version }}"
+      when: java_version != "latest"
+
     - name: Install Zulu
       apt:
         cache_valid_time: "{{ apt_cache_valid_time }}"
-        name: "{{ zulu_package }}"
-        state: "{{ java_desired_state }}"
+        name: "{{ java_package_name }}"
+        state: "{{ java_package_state }}"
   become: yes
   become_user: root
 ...

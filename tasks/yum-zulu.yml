@@ -1,0 +1,26 @@
+---
+
+- block:
+    - name: Import Azul's public key
+      rpm_key:
+        key: 'http://repos.azulsystems.com/RPM-GPG-KEY-azulsystems'
+        state: present
+
+    - name: Add the Azul package to the repository
+      get_url:
+        dest: /etc/yum.repos.d/zulu.repo
+        force: no
+        url: 'http://repos.azulsystems.com/rhel/zulu.repo'
+
+    - name: Set Zulu package name
+      set_fact:
+        java_package_state: present
+        java_package_name: "zulu-{{ java_major_version }}-{{ java_version }}"
+      when: java_version != "latest"
+
+    - name: Install Zulu
+      yum:
+        name: "{{ java_package_name }}"
+        state: "{{ java_package_state }}"
+  become: yes
+  become_user: root
