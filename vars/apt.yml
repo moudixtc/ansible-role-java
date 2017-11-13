@@ -1,2 +1,3 @@
 ---
 apt_cache_valid_time: 43200
+java_apt_repo: "deb http://repos.azulsystems.com/{{ ansible_lsb.id | lower }} stable main"

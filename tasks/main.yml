@@ -13,7 +13,7 @@
   include_tasks: "{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
 - block:
-    - name: Setup JAVA_HOME environment variable
+    - name: "Setup JAVA_HOME environment variable at {{ jave_home }}"
       blockinfile:
         block: |
           export JAVA_HOME={{ java_home }}
@@ -21,5 +21,5 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK to set java environment variables"
         path: /etc/bash.bashrc
   become: yes
-  become_user: root
+  become_user: "{{ become_user }}"
 ...

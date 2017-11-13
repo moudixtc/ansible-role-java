@@ -1,10 +1,9 @@
 ---
 # defaults file for ansible-role-java
-
+become_user: root
 java_home: "/usr/lib/jvm/zulu-{{ java_major_version }}-amd64"
 java_major_version: 8
 java_package_name: "zulu-{{ java_major_version }}"
-java_package_state: latest
 java_vendor: zulu
 java_version: latest
 ...
