@@ -1,31 +1,34 @@
-Role Name
+Role Name: moudixtc.java
 =========
 
-A brief description of the role goes here.
+Installs Java. Currently only [Zulu Java OpenJDK](https://www.azul.com/products/zulu-and-zulu-enterprise/) is supported.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+N/A
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Refer to the [defaults](defaults/main.yml) and all the package manager and distribution specific variables in /vars directory.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+To install an older version of zulu-8 on ubuntu. The package installed wil be `zulu-8=8.23.0.3`, and it is Java `8u144`:
 
     - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+      tasks:
+        - include_role:
+            name: moudixtc.java
+          vars:
+            java_version: '8.23.0.3'
 
 License
 -------

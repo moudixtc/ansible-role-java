@@ -1,9 +1,21 @@
 ---
 # defaults file for ansible-role-java
+
+# The user to become for tasks that require escalated privilege
 become_user: root
+
+# The value to set for the JAVA_HOME environment variable
 java_home: "/usr/lib/jvm/zulu-{{ java_major_version }}-amd64"
+
+# Java major version
 java_major_version: 8
+
+# The base name of the Java in the OS's package manager
 java_package_name: "zulu-{{ java_major_version }}"
+
+# The vendor of Java to install. Currently only zulu is supported
 java_vendor: zulu
+
+# The version of Java to install. When not set as 'latest', it must be the exact version shown in the OS's package manager
 java_version: latest
 ...

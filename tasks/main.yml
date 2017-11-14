@@ -6,20 +6,20 @@
   ignore_errors: yes
 
 - name: Include distribution specific vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars: "{{ item }}.yml"
+  with_items:
+    - "{{ ansible_distribution | lower }}"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}"
   ignore_errors: yes
 
 - name: Run package manager specific tasks
   include_tasks: "{{ ansible_pkg_mgr }}-{{ java_vendor }}.yml"
 
-- block:
-    - name: "Setup JAVA_HOME environment variable at {{ jave_home }}"
-      blockinfile:
-        block: |
-          export JAVA_HOME={{ java_home }}
-        create: yes
-        marker: "# {mark} ANSIBLE MANAGED BLOCK to set java environment variables"
-        path: /etc/bash.bashrc
+- name: Setup JAVA_HOME environment variable at "{{ java_home }}"
+  lineinfile:
+    line: "JAVA_HOME={{ java_home }}"
+    path: /etc/environment
+    regexp: '^JAVA_HOME='
   become: yes
   become_user: "{{ become_user }}"
 ...
