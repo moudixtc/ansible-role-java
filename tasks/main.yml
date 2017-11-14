@@ -1,13 +1,10 @@
 ---
 # tasks file for ansible-role-java
 
-- name: Include package manager specific vars
-  include_vars: "{{ ansible_pkg_mgr }}.yml"
-  ignore_errors: yes
-
-- name: Include distribution specific vars
+- name: Include OS specific vars
   include_vars: "{{ item }}.yml"
   with_items:
+    - "{{ ansible_pkg_mgr }}"
     - "{{ ansible_distribution | lower }}"
     - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}"
   ignore_errors: yes
