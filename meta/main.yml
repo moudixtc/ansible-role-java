@@ -32,12 +32,12 @@ galaxy_info:
   # platform on this list, let us know and we'll get it added!
   #
   platforms:
-    - name: EL
-  #  versions:
+  - name: EL
+    versions:
   #  - all
   #  - 5
   #  - 6
-        - 7
+    - 7
   #- name: GenericUNIX
   #  versions:
   #  - all
@@ -134,8 +134,8 @@ galaxy_info:
   #  - 9.1
   #  - 9.2
   #  - 9.3
-    - name: Ubuntu
-  #  versions:
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
@@ -145,11 +145,11 @@ galaxy_info:
   #  - quantal
   #  - raring
   #  - saucy
-      - trusty
+    - trusty
   #  - utopic
   #  - vivid
   #  - wily
-      - xenial
+    - xenial
   #- name: SLES
   #  versions:
   #  - all
