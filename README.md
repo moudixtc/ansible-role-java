@@ -1,7 +1,7 @@
 Role Name: moudixtc.java
 =========
 
-Installs Java. Currently only [Zulu Java OpenJDK](https://www.azul.com/products/zulu-and-zulu-enterprise/) is supported.
+Installs Java. Currently only [Zulu Java OpenJDK](https://www.azul.com/products/zulu-and-zulu-enterprise) is supported.
 
 Requirements
 ------------
@@ -21,7 +21,7 @@ N/A
 Example Playbook
 ----------------
 
-To install an older version of zulu-8 on ubuntu. The package installed wil be `zulu-8=8.23.0.3`, and it is Java `8u144`:
+To install an older version of zulu-8 on ubuntu. The package installed will be `zulu-8=8.23.0.3`, and it is Java `8u144`:
 
     - hosts: servers
       tasks:
