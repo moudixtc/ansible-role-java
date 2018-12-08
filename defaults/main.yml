@@ -8,7 +8,7 @@ become_user: root
 java_home: "/usr/lib/jvm/zulu-{{ java_major_version }}-amd64"
 
 # Java major version
-java_major_version: 8
+java_major_version: 11
 
 # The base name of the Java in the OS's package manager
 java_package_name: "zulu-{{ java_major_version }}"
